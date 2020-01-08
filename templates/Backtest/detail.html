@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+                  {% block active %}
+            <li ><a href="/">Home</a></li>
+            <li><a href="/strategy/all/">Strategy</a></li>
+            <li class="active"><a href="/backtest/">Backtest</a></li>
+              {% endblock %}
+{% block content %}
+ <div class="page-header">
+        <h1>Report of {{ backtest.strategy.title }}</h1>
+ </div>
+
+    <div class="row">
+        <div class="center">
+        <img src="{{ image }}" class="img-responsive center-block">
+        </div>
+    </div>
+           <div class="col-sd-6">
+          <table class="table">
+              <thead>
+              <tr>
+                <th>Profit</th>
+                <th>Sharp</th>
+                <th>MaxDrawDown</th>
+                <th>BuyNumber</th>
+                  <th>BuyProfit</th>
+                  <th>SellNumber</th>
+                  <th>SellProfit</th>
+                  <th>Winrate</th>
+                  <th>ProfitFactor</th>
+                  <th>Std</th>
+                  <th>MeanOfProfit</th>
+              </tr>
+            </thead>
+    <tr>
+        <td>{{ backtest.Profit }}</td>
+        <td>{{ backtest.Sharp }}</td>
+        <td>{{ backtest.MaxDrawdown }}</td>
+        <td>{{ backtest.Buynumber }}</td>
+        <td>{{ backtest.Buyprofit }}</td>
+        <td>{{ backtest.Sellnumber }}</td>
+        <td>{{ backtest.Sellprofit }}</td>
+        <td>{{ backtest.Winrate }}</td>
+        <td>{{ backtest.Profitfactor }}</td>
+        <td>{{ backtest.Std }}</td>
+        <td>{{ backtest.Mean }}</td>
+    </tr>
+          </table>
+           </div>
+
+
+           <div class="col-sd-6">
+          <table class="table">
+              <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Lot</th>
+                <th>Type</th>
+                <th>OpenTime</th>
+                  <th>CloseTime</th>
+                  <th>OpenPrice</th>
+                  <th>ClosePrice</th>
+                  <th>Mount</th>
+              </tr>
+            </thead>
+    {% for i in order %}
+        <tr>
+
+        <td>{{ i.Symbol }}</td>
+        <td>{{ i.Lot }}</td>
+            {% ifequal i.Type 0 %}
+        <td>Buy</td>
+            {% endifequal %}
+            {% ifequal i.Type 1 %}
+        <td>Sell</td>
+            {% endifequal %}
+        <td>{{ i.OpenTime }}</td>
+        <td>{{ i.CloseTime }}</td>
+        <td>{{ i.OpenPrice }}</td>
+        <td>{{ i.ClosePrice }}</td>
+        <td>{{ i.Mount}}</td>
+
+    </tr>
+              {% endfor %}
+          </table>
+           </div>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if order.has_previous %}
+            <a href="?page={{ order.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ order.number }} of {{ order.paginator.num_pages }}.
+        </span>
+
+        {% if order.has_next %}
+            <a href="?page={{ order.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

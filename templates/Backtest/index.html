@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+                      {% block active %}
+            <li ><a href="/">Home</a></li>
+            <li><a href="/strategy/all/">Strategy</a></li>
+            <li class="active"><a href="/backtest/">Backtest</a></li>
+              {% endblock %}
+{% block content %}
+ <div class="page-header">
+        <h1>Backtest</h1>
+ </div>
+
+       <div class="row">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Strategy</th>
+                  <th>Status</th>
+                <th>Profit</th>
+                  <th>Sharp</th>
+                  <th>WinRate</th>
+                  <th>ProfitFactor</th>
+                  <th>Info</th>
+                  <th>DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+    {% for i in index %}
+    <tr>
+        <td>{{ i.task }}</td>
+        {% ifnotequal i.status 'ERROR'%}
+        <td><a href="/backtest/detail/{{ i.pk }}/">{{ i.strategy.title }}</a></td>
+        {% endifnotequal %}
+        {% ifequal i.status 'ERROR'%}
+        <td>{{ i.strategy.title }}</td>
+        {% endifequal %}
+        <td>{{ i.status }}</td>
+        <td>{{ i.Profit }}</td>
+        <td>{{ i.Sharp }}</td>
+        <td>{{ i.Winrate }}</td>
+        <td>{{ i.Profitfactor }}</td>
+        {% ifnotequal i.status 'ERROR'%}
+            <td>Error_Info</td>
+        {% endifnotequal %}
+        {% ifequal i.status 'ERROR'%}
+            <td><a href="/backtest/error/{{ i.pk }}/">Error_Info</td>
+        {% endifequal %}
+        <td><a href="/backtest/del/{{ i.pk }}/">DELETE</a></td>
+
+    </tr>
+    {% endfor %}
+            </tbody>
+          </table>
+        </div>
+       </div>
+
+{% endblock %}

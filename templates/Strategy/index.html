@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+                  {% block active %}
+            <li ><a href="/">Home</a></li>
+            <li class="active"><a href="/strategy/all/">Strategy</a></li>
+            <li><a href="/backtest/">Backtest</a></li>
+              {% endblock %}
+{% block content %}
+ <div class="page-header">
+        <h1>Strategys</h1>
+ </div>
+
+
+       <div class="row">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>User</th>
+                  <th>Status</th>
+                  <th>Operate</th>
+                  <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+    {% for i in strategy %}
+    <tr>
+        <td>{{ i.pk }}</td>
+        <td><a href="/strategy/detail/{{ i.pk }}/">{{ i.title }}</a></td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.user }}</td>
+        <td>{{ i.get_status_display }}</td>
+        <td><a href="/backtest/{{ i.pk }}/">TEST</a></td>
+        <td><a href="/strategy/delete/{{ i.pk }}/">DELETE</a></td>
+    </tr>
+    {% endfor %}
+            </tbody>
+          </table>
+        </div>
+       </div>
+
+{% endblock %}

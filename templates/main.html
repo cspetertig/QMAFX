@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Welcome to WebForex</h1>
+        <p>You can develop your own Forex Strategy online and run the backtest to see the detailed reports.</p>
+        <p>Many things need to be done...</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="/strategy/new/" role="button">Start a new strategy &raquo;</a>
+        </p>
+      </div>
+{% endblock %}
+              {% block active %}
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/strategy/all/">Strategy</a></li>
+            <li><a href="/backtest/">Backtest</a></li>
+              {% endblock %}

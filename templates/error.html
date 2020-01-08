@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+                  {% block active %}
+            <li ><a href="/">Home</a></li>
+            <li><a href="/strategy/all/">Strategy</a></li>
+            <li ><a href="/backtest/">Backtest</a></li>
+              {% endblock %}
+{% block content %}
+<div class="middle-box text-center animated fadeInDown" >
+    <h1>ERROR</h1>
+    <h3 > {{ error }}</h3>
+
+</div>
+{% endblock %}
